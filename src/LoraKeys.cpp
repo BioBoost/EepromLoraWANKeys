@@ -5,16 +5,22 @@ namespace LoRaWAN{
     I2C i2cbus(D14, D15); //sda & scl
     EEPROMDriver::EEPROM eeprom(&i2cbus);
 
-    void Keys::write_devEui(char* devEui){
-        eeprom.write(devEui, 8, 0);
+    Keys::Keys(LoRaWANKeys lora_keys){
+        write_devEui(lora_keys.devEui);
+        write_appEui(lora_keys.appEui);
+        write_appKey(lora_keys.appKey);
+    }
+
+    void Keys::write_devEui(char * devEui){
+        eeprom.write(devEui, get_Length_Of_Key(devEui), 0);
     }
     
-    void Keys::write_appEui(char* appEui){
-        eeprom.write(appEui, 8, 8);
+    void Keys::write_appEui(char * appEui){
+        eeprom.write(appEui, get_Length_Of_Key(appEui),get_Length_Of_Key(appEui));
     }
     
-    void Keys::write_appKey(char* appKey){
-        eeprom.write(appKey, 16, 16);
+    void Keys::write_appKey(char * appKey){
+        eeprom.write(appKey, get_Length_Of_Key(appKey), get_Length_Of_Key(appKey));
     }
 
     char * Keys::read_devEui(void){
@@ -30,5 +36,9 @@ namespace LoRaWAN{
     char * Keys::read_appKey(void){
         eeprom.read(buffer_appKey, 16, 16);
         return buffer_appKey;
+    }
+
+    int Keys::get_Length_Of_Key(char * key){
+        return sizeof(key);
     }
 }

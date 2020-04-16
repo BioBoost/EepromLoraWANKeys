@@ -1,14 +1,15 @@
 #pragma once
 #include "EEPROM.h"
-
 struct LoRaWANKeys{
     char devEui[8];
     char appEui[8];
     char appKey[16];
 };
-
 namespace LoRaWAN{
+
     class Keys{
+        public:
+            Keys(struct LoRaWANKeys);
 
         public:
             void write_devEui(char* devEui);
@@ -21,9 +22,13 @@ namespace LoRaWAN{
             char * read_appKey(void);
 
         private:
+            int get_Length_Of_Key(char * key);
+
+        private:
             char * buffer_devEui;
             char * buffer_appEui;
             char * buffer_appKey; 
+        
 
     };
 };
