@@ -1,7 +1,7 @@
-main.cpp
+./main.cpp
 .mbed
 mbed-os/
 mbed_app.json
 mbed_settings.py
-mbed-os.lib
+./mbed-os.lib
 BUILD/
