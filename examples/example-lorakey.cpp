@@ -13,19 +13,7 @@ int main()
         {0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF} // appKey
     };
 
-    LoRaWAN::Keys keys;
-    
-    pc.printf("\r\nWriting devEui to eeprom");
-
-    keys.write_devEui(lora_keys.devEui);
-
-    pc.printf("\r\nWriting appEui to eeprom");
-
-    keys.write_appEui(lora_keys.appEui);
-
-    pc.printf("\r\nWriting appKey to eeprom");
-
-    keys.write_appKey(lora_keys.appKey);
+    LoRaWAN::Keys keys(lora_keys); //saving keys to eeprom
 
     char * devEui;
     char * appEui;
@@ -44,17 +32,17 @@ int main()
     appKey = keys.read_appKey();
    
     pc.printf("\r\nPrinting devEui to serial\r\n");
-    for(unsigned int i = 0; i < 8; i++){
+    for(unsigned int i = 0; i < sizeof(devEui); i++){
         pc.printf("0x%x ", devEui[i]);
     }
 
     pc.printf("\r\nPrinting appEui to serial\r\n");
-    for(unsigned int i = 0; i < 8; i++){
+    for(unsigned int i = 0; i < sizeof(appEui); i++){
         pc.printf("0x%x ", appEui[i]);
     }
 
     pc.printf("\r\nPrinting appKey to serial\r\n");
-    for(unsigned int i = 0; i < 16; i++){
+    for(unsigned int i = 0; i < sizeof(appKey); i++){
         pc.printf("0x%x ", appKey[i]);
     }
 }
