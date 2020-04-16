@@ -9,13 +9,11 @@ struct LoRaWANKeys{
 
 namespace LoRaWAN{
     class Keys{
-        public:
-            Keys(struct LoraWANKeys);
 
-        private:
+        public:
             void set_devEui(char devEui[8]);
             void set_appEui(char appEui[8]);
-            void set_appEui(char appKey[16]);
+            void set_appKey(char appKey[16]);
 
          public:
             void write_devEui(void);
@@ -28,9 +26,9 @@ namespace LoRaWAN{
             char read_appKey(void);
 
         public:
-            int get_length_of_devEui(void);
-            int get_length_of_appEui(void);
-            int get_length_of_appKey(void);
+            unsigned int get_length_of_devEui(void);
+            unsigned int get_length_of_appEui(void);
+            unsigned int get_length_of_appKey(void);
         
         private:
             char devEui[8];
@@ -40,10 +38,6 @@ namespace LoRaWAN{
             char buffer_devEui[8]= {0};
             char buffer_appEui[8]= {0};
             char buffer_appKey[16]= {0};
-
-        
-            I2C i2cbus(D14, D15); //sda & scl
-            EEPROMDriver::EEPROM eeprom(&i2cbus);
 
     };
 };
