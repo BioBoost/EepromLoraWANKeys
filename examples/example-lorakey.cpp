@@ -31,38 +31,44 @@ int main()
 
     keys.write_appKey();
 
-    char devEui[keys.get_length_of_devEui()] = 0;
-    char appEui[keys.get_length_of_appEui()] = 0;
-    char appKey[keys.get_length_of_appKey()] = 0;
+    // char devEui[keys.get_length_of_devEui()] = {0};
+    char * devEui;
+    char appEui[keys.get_length_of_appEui()] = {0};
+    char appKey[keys.get_length_of_appKey()] = {0};
 
     pc.printf("\r\nReading devEui to eeprom");
 
-    devEui = keys.read_devEui();
-
+    keys.read_devEui();
+    
     pc.printf("\r\nReading appEui to eeprom");
 
-    appEui = keys.read_appEui();
+    keys.read_appEui();
 
     pc.printf("\r\nReading appKey to eeprom");
 
-    appKey = keys.read_appKey();
-
+    keys.read_appKey();
+   
     pc.printf("\r\nPrinting devEui to serial\r\n");
+    
+    devEui = keys.get_devEui();
 
-    for(unsigned int i = 0; i < keys.get_length_of_devEui(); i++){
-        pc.printf("0x%x", devEui[i]);
+    // for(unsigned int i = 0; i < keys.get_length_of_devEui(); i++){
+    //         pc.printf("0x%x ", devEui[i]);
+    // }
+       for(unsigned int i = 0; i < 9; i++){
+            pc.printf("0x%x ", devEui[i]);
     }
     
-    pc.printf("\r\nPrinting appEui to serial\r\n");
+    // pc.printf("\r\nPrinting appEui to serial\r\n");
 
-    for(unsigned int i = 0; i < keys.get_length_of_appEui(); i++){
-        pc.printf("0x%x", appEui[i]);
-    }
+    // for(unsigned int i = 0; i < keys.get_length_of_appEui(); i++){
+    //     pc.printf("0x%x", appEui[i]);
+    // }
    
-    pc.printf("\r\nPrinting appKey to serial\r\n");
+    // pc.printf("\r\nPrinting appKey to serial\r\n");
 
-    for(unsigned int i = 0; i < keys.get_length_of_appKey(); i++){
-        pc.printf("0x%x", appKey[i]);
-    }
+    // for(unsigned int i = 0; i < keys.get_length_of_appKey(); i++){
+    //     pc.printf("0x%x", appKey[i]);
+    // }
    
 }
