@@ -14,61 +14,47 @@ int main()
     };
 
     LoRaWAN::Keys keys;
-
-    keys.set_devEui(lora_keys.devEui);
-    keys.set_appEui(lora_keys.appEui);
-    keys.set_appKey(lora_keys.appKey);
-
+    
     pc.printf("\r\nWriting devEui to eeprom");
 
-    keys.write_devEui();
+    keys.write_devEui(lora_keys.devEui);
 
     pc.printf("\r\nWriting appEui to eeprom");
 
-    keys.write_appEui();
+    keys.write_appEui(lora_keys.appEui);
 
     pc.printf("\r\nWriting appKey to eeprom");
 
-    keys.write_appKey();
+    keys.write_appKey(lora_keys.appKey);
 
-    // char devEui[keys.get_length_of_devEui()] = {0};
     char * devEui;
-    char appEui[keys.get_length_of_appEui()] = {0};
-    char appKey[keys.get_length_of_appKey()] = {0};
+    char * appEui;
+    char * appKey;
 
     pc.printf("\r\nReading devEui to eeprom");
 
-    keys.read_devEui();
+    devEui = keys.read_devEui();
     
     pc.printf("\r\nReading appEui to eeprom");
 
-    keys.read_appEui();
+    appEui = keys.read_appEui();
 
     pc.printf("\r\nReading appKey to eeprom");
 
-    keys.read_appKey();
+    appKey = keys.read_appKey();
    
     pc.printf("\r\nPrinting devEui to serial\r\n");
-    
-    devEui = keys.get_devEui();
-
-    // for(unsigned int i = 0; i < keys.get_length_of_devEui(); i++){
-    //         pc.printf("0x%x ", devEui[i]);
-    // }
-       for(unsigned int i = 0; i < 9; i++){
-            pc.printf("0x%x ", devEui[i]);
+    for(unsigned int i = 0; i < 8; i++){
+        pc.printf("0x%x ", devEui[i]);
     }
-    
-    // pc.printf("\r\nPrinting appEui to serial\r\n");
 
-    // for(unsigned int i = 0; i < keys.get_length_of_appEui(); i++){
-    //     pc.printf("0x%x", appEui[i]);
-    // }
-   
-    // pc.printf("\r\nPrinting appKey to serial\r\n");
+    pc.printf("\r\nPrinting appEui to serial\r\n");
+    for(unsigned int i = 0; i < 8; i++){
+        pc.printf("0x%x ", appEui[i]);
+    }
 
-    // for(unsigned int i = 0; i < keys.get_length_of_appKey(); i++){
-    //     pc.printf("0x%x", appKey[i]);
-    // }
-   
+    pc.printf("\r\nPrinting appKey to serial\r\n");
+    for(unsigned int i = 0; i < 16; i++){
+        pc.printf("0x%x ", appKey[i]);
+    }
 }
