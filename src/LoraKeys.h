@@ -9,7 +9,7 @@ namespace LoRaWAN{
 
     class Keys{
         public:
-            Keys(struct LoRaWANKeys);
+           Keys(struct LoRaWANKeys);
 
         public:
             void write_devEui(char* devEui);
@@ -23,11 +23,12 @@ namespace LoRaWAN{
 
         private:
             int get_Length_Of_Key(char * key);
-
+            
         private:
             char * buffer_devEui;
             char * buffer_appEui;
             char * buffer_appKey; 
+        
         
 
     };

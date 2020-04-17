@@ -12,15 +12,15 @@ namespace LoRaWAN{
     }
 
     void Keys::write_devEui(char * devEui){
-        eeprom.write(devEui, get_Length_Of_Key(devEui), 0);
+        eeprom.write(devEui, 8,0);
     }
     
     void Keys::write_appEui(char * appEui){
-        eeprom.write(appEui, get_Length_Of_Key(appEui),get_Length_Of_Key(appEui));
+        eeprom.write(appEui, 8,8);
     }
     
     void Keys::write_appKey(char * appKey){
-        eeprom.write(appKey, get_Length_Of_Key(appKey), get_Length_Of_Key(appKey));
+        eeprom.write(appKey, 16, 16);
     }
 
     char * Keys::read_devEui(void){
