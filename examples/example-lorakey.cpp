@@ -1,17 +1,21 @@
 #include "mbed.h"
 #include "LoraKeys.h"
-
 Serial pc(USBTX, USBRX);
+
+
+
 
 int main()
 {
-    printf("\r\n[Particula] Example of usage LoraKeys class");
+    pc.printf("\r\n[Particula] Example of usage LoraKeys class");
 
-    LoRaWANKeys lora_keys = {
-        {0x10, 0x76, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF},                                                // devEui
+    struct LoRaWAN::LoRaWANKeys lora_keys = {
+        {0x10, 0x76, 0x92, 0x12, 0x52, 0x97, 0x99, 0xFF},                                                // devEui
         {0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF},                                                // appEui
         {0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF} // appKey
     };
+
+        
 
     LoRaWAN::Keys keys(lora_keys); //saving keys to eeprom
 
@@ -19,15 +23,16 @@ int main()
     char * appEui;
     char * appKey;
 
-    pc.printf("\r\nReading devEui to eeprom");
+    pc.printf("\r\nReading devEui from eeprom");
 
     devEui = keys.read_devEui();
     
-    pc.printf("\r\nReading appEui to eeprom");
+    
+    pc.printf("\r\nReading appEui from eeprom");
 
     appEui = keys.read_appEui();
 
-    pc.printf("\r\nReading appKey to eeprom");
+    pc.printf("\r\nReading appKey from eeprom");
 
     appKey = keys.read_appKey();
    
