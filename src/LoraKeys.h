@@ -8,6 +8,7 @@ namespace LoRaWAN{
     char appEui[8];
     char appKey[16];
     };
+
     class Keys{
         public:
            Keys(struct LoRaWANKeys);
@@ -23,14 +24,15 @@ namespace LoRaWAN{
             char * read_appKey(void);
 
         private:
-            int get_Length_Of_Key(char * key);
+            unsigned int length_of_devEui = 8;
+            unsigned int length_of_appEui = 8;
+            unsigned int length_of_appKey = 16;
+            unsigned int offset = 0;
             
         private:
             char buffer_devEui[8]={0};
             char buffer_appEui[8]={0};
             char buffer_appKey[16]={0}; 
-            
-
 
     };
 };
