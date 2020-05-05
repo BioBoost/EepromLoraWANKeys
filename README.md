@@ -22,8 +22,11 @@ mbed toolchain GCC_ARM
 mbed target detect
 mbed compile -f
 ```
-## Example
+## Code
 Make a main.cpp file in the root directory and copy this code in it. With this code we're just calling to the classes that read and write the keys. You can find this code in the directory EepromLoraWANKeys/examples
+
+
+The read & write classes are in the EepromLoraWANKeys/src directory. If you want to have a look at those.
 
 ```cpp
 #include "mbed.h"
