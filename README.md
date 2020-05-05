@@ -2,6 +2,25 @@
 
 In this repo you will find classes so you can write/read lorawan keys (or any array you want) to an eeprom.
 
+## UML Diagram
+
+|Lorawankeys|
+|-|
+|- buffer_devEui: char |
+|- buffer_appEui: char |
+|- buffer_appKey: char |
+|- length_of_devEui: unsigned int |
+|- length_of_appEui: unsigned int |
+|- length_of_appKey: unsigned int|
+|- offset: unsigned int|
+|+ write_devEui(devEui: char*, length_of_devEui: unsigned int, offset: unsigned int)|
+|+write_appEui(appEui: char*, length_of_appEui: unsigned int, offset: unsigned int)|
+|+write_appKey(appKey: char*, length_of_appKey: unsigned int, offset: unsigned int)|
+|+read_devEui(buffer_devEui: char , length_of_devEui: unsigned int, offset: unsigned int)|
+|+read_appEui(buffer_appEui: char , length_of_appEui: unsigned int, offset: unsigned int)|
+|+read_appKey(buffer_appKey: char , length_of_appKeyi: unsigned int, offset: unsigned int)|
+
+
 ## Installing software
 
 For using this eeprom you have to have the following software installed:
@@ -32,8 +51,6 @@ The read & write classes are in the EepromLoraWANKeys/src directory. If you want
 #include "mbed.h"
 #include "LoraKeys.h"
 Serial pc(USBTX, USBRX);
-
-
 
 
 int main()
