@@ -1,11 +1,19 @@
 #include "LoraKeys.h"
 
+
 namespace LoRaWAN{
      
     I2C i2cbus(D14, D15); //sda & scl
     EEPROMDriver::EEPROM eeprom(&i2cbus);
 
     Keys::Keys(LoRaWANKeys lora_keys){
+
+    //     pc.printf("\r\nPrinting devEui to serial\r\n");
+    //     for(unsigned int i = 0; i < 8; i++){
+    //     pc.printf("0x%x ", lora_keys.devEui[i]);
+    // }
+
+       
         write_devEui(lora_keys.devEui);
         write_appEui(lora_keys.appEui);
         write_appKey(lora_keys.appKey);
@@ -14,6 +22,7 @@ namespace LoRaWAN{
     void Keys::write_devEui(char * devEui){
         eeprom.write(devEui, 8,0);
     }
+
     
     void Keys::write_appEui(char * appEui){
         eeprom.write(appEui, 8,8);
@@ -22,12 +31,14 @@ namespace LoRaWAN{
     void Keys::write_appKey(char * appKey){
         eeprom.write(appKey, 16, 16);
     }
-
-    char * Keys::read_devEui(void){
-        eeprom.read(buffer_devEui, 8, 0);   
+ 
+   char * Keys::read_devEui(void){
+        eeprom.read(buffer_devEui, 8, 0); 
         return buffer_devEui;
+
     }
-            
+ 
+
     char * Keys::read_appEui(void){
         eeprom.read(buffer_appEui, 8, 8);
         return buffer_appEui;
